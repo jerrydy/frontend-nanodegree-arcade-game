@@ -3,8 +3,17 @@
 <head>
     <title>Effective JavaScript: Frogger</title>
     <link rel="stylesheet" href="css/style.css">
+	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+	<meta content="utf-8" http-equiv="encoding">    
 </head>
 <body>
+	<div id="infopanel">
+		<div id="score"></div>
+		<div id="life"></div>
+		<div id="timer"></div>
+	</div>
+	<div id="game" class="game"></div>
+	<div id="instructions">Use your arrow keys to move your player up, down, left or right. You earn points for crossing the road to the water.</div>
     <script src="js/resources.js"></script>
     <script src="js/app.js"></script>
     <script src="js/engine.js"></script>

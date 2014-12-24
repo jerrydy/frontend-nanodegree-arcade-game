@@ -48,8 +48,9 @@ Enemy.prototype.checkCollision = function() {
     // can only collide if in the same row as the player
     if (this.gy == player.gy) {
         // check if the left or right edge of the enemy touches the player
-        if (this.x + Resources.get(this.sprite).width > player.gx * gameProperties.cellWidth + 22 &&
-            this.x < player.gx * gameProperties.cellWidth + Resources.get(player.sprite).width - 22) {
+        if (this.x + Resources.get(this.sprite).width > player.gx * gameProperties.cellWidth + 25 &&
+            this.x < player.gx * gameProperties.cellWidth + Resources.get(player.sprite).width - 25) {
+            gameProperties.life--;
             player.reset ();
         };
     }
@@ -67,6 +68,18 @@ var Player = function() {
 }
 
 Player.prototype.update = function (dt) {
+    var score = document.querySelector("#score");
+    score.innerHTML = "Score: " + gameProperties.score.toString();
+    var life = document.querySelector("#life");
+    life.innerHTML = "Lives: " + gameProperties.life.toString();    
+    var timer = document.querySelector("#timer");
+    var currentTime = new Date();
+    gameProperties.timeLeft = Math.round((gameProperties.startTime.getTime() + (gameProperties.totalTime * 1000) - currentTime.getTime()) / 1000);
+    timer.innerHTML = "Time Left: " + gameProperties.timeLeft.toString();
+    if (gameProperties.timeLeft <= 0) {
+        alert ("No time left! You scored " + gameProperties.score.toString () + " points! Click Okay to start a new game");
+        this.newGame ();
+    }
 
 }
 
@@ -99,6 +112,11 @@ Player.prototype.reset = function () {
     this.gx = Math.floor (gameProperties.numCols / 2);
 
     this.gy = gameProperties.numRows - 2;
+
+    if (gameProperties.life <= 0) {
+        alert ("No lives left! You scored " + gameProperties.score.toString () + " points! Click Okay to start a new game");
+        this.newGame ();
+    }
 }
 
 Player.prototype.checkRange = function () {
@@ -117,6 +135,12 @@ Player.prototype.checkRange = function () {
     }
 }
 
+Player.prototype.newGame = function () {
+    gameProperties.life = gameProperties.totalLife;
+    gameProperties.score = 0;
+    gameProperties.startTime = new Date ();
+}
+
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
@@ -128,7 +152,14 @@ var gameProperties = {
     numCols: 5,
     cellWidth: 101,
     cellHeight: 83,
-    score: 0
+    totalLife: 3,       // total lives when a new game starts
+    totalTime: 60,      // total time when a new game starts
+
+    // following properties are updated during game play
+    score: 0,
+    life: 3,
+    startTime: null,    // time when game started
+    timeLeft: 1
 };
 
 var allEnemies = [];     // store as an array
@@ -140,7 +171,7 @@ for (i=0; i < gameProperties.enemyCount; i++) {
 
 // now the player object
 var player = new Player();
-
+player.newGame ();
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.

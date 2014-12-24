@@ -1,3 +1,28 @@
 body {
     text-align: center;
 }
+
+#score {
+	font: 64px Impact;
+	color: blue;
+	float: left;
+}
+
+#life {
+	font: 64px Impact;
+	color: green;
+	float: right;
+}
+
+#instructions {
+	font: 18px Impact;
+	color: black;
+}
+
+#timer {
+	font: 52px Impact;
+	color: black;
+}
+
+#game {
+}
