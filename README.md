@@ -1,6 +1,7 @@
-frontend-nanodegree-arcade-game
-===============================
+This is Jerry's Frogger Arcade Game
 
-Students should use this rubric: https://www.udacity.com/course/viewer#!/c-ud015/l-3072058665/m-3072588797
+Go to http://jerrydy.github.io/arcade-game/index.html for an actual live demo of the game.
 
-for self-checking their submission.
+You can clone to your local computer using this URL: https://github.com/jerrydy/frontend-nanodegree-arcade-game.git
+
+Then load index.html on your browser to start the game.

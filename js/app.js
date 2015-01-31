@@ -8,7 +8,7 @@ var Enemy = function() {
     this.sprite = 'images/enemy-bug.png';
     Resources.load(this.sprite);
     this.reset ();
-}
+};
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
@@ -24,12 +24,12 @@ Enemy.prototype.update = function(dt) {
 
     // check if I just collided with the player
     this.checkCollision ();
-}
+};
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-}
+};
 
 Enemy.prototype.reset = function() {
 
@@ -42,7 +42,7 @@ Enemy.prototype.reset = function() {
 
     // speed is from 100 to 600
     this.movementSpeed = Math.random() * 500 + 100;
-}
+};
 
 Enemy.prototype.checkCollision = function() {
     // can only collide if in the same row as the player
@@ -52,9 +52,9 @@ Enemy.prototype.checkCollision = function() {
             this.x < player.gx * gameProperties.cellWidth + Resources.get(player.sprite).width - 25) {
             gameProperties.life--;
             player.reset ();
-        };
+        }
     }
-}
+};
 
 
 // Now write your own player class
@@ -62,10 +62,10 @@ Enemy.prototype.checkCollision = function() {
 // a handleInput() method.
 
 var Player = function() {
-    this.sprite = 'images/char-boy.png'
+    this.sprite = 'images/char-boy.png';
     Resources.load(this.sprite);
     this.reset ();
-}
+};
 
 Player.prototype.update = function (dt) {
     var score = document.querySelector("#score");
@@ -81,13 +81,13 @@ Player.prototype.update = function (dt) {
         this.newGame ();
     }
 
-}
+};
 
 Player.prototype.render = function () {
     this.x = this.gx * gameProperties.cellWidth;
     this.y = this.gy * gameProperties.cellHeight - 10;
     ctx.drawImage(Resources.get(this.sprite), this.x , this.y);
-}
+};
 
 Player.prototype.handleInput = function (key) {
     switch (key) {
@@ -103,9 +103,9 @@ Player.prototype.handleInput = function (key) {
         case "down":
             this.gy++;
             break;
-    };
+    }
     this.checkRange ();
-}
+};
 
 Player.prototype.reset = function () {
     // start at the center
@@ -117,7 +117,7 @@ Player.prototype.reset = function () {
         alert ("No lives left! You scored " + gameProperties.score.toString () + " points! Click Okay to start a new game");
         this.newGame ();
     }
-}
+};
 
 Player.prototype.checkRange = function () {
     if (this.gx < 0) {
@@ -133,13 +133,13 @@ Player.prototype.checkRange = function () {
         gameProperties.score += 1;
         this.reset();
     }
-}
+};
 
 Player.prototype.newGame = function () {
     gameProperties.life = gameProperties.totalLife;
     gameProperties.score = 0;
     gameProperties.startTime = new Date ();
-}
+};
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
